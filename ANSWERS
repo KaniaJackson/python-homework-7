@@ -1,0 +1,169 @@
+1.def simpleDiv(dividend, divisor):
+    quotient = 0
+    while dividend >= divisor:
+        dividend -= divisor
+        quotient += 1
+    return quotient
+
+def main():
+    print("--- Integer Division Simulator ---")
+    dividend = int(input("Enter the dividend: "))
+    divisor = int(input("Enter the divisor: "))
+    
+    if divisor == 0:
+        print("Error: Division by zero is undefined.")
+    else:
+        result = simpleDiv(dividend, divisor)
+        print(f"Result: {dividend} // {divisor} = {result}")
+
+if __name__ == "__main__":
+    main()
+2.from graphics import *
+
+def is_clicked(click_point, button_rect):
+    """Returns True if click_point falls inside button_rect boundaries, False otherwise."""
+    if click_point is None:
+        return False
+        
+    p1 = button_rect.getP1()
+    p2 = button_rect.getP2()
+    
+    # Establish bounding limits regardless of coordinate declaration order
+    x_min, x_max = min(p1.getX(), p2.getX()), max(p1.getX(), p2.getX())
+    y_min, y_max = min(p1.getY(), p2.getY()), max(p1.getY(), p2.getY())
+    
+    return x_min <= click_point.getX() <= x_max and y_min <= click_point.getY() <= y_max
+
+def main():
+    win = GraphWin("Button Window", 400, 400)
+    
+ 
+    button = Rectangle(Point(140, 180), Point(260, 220))
+    button.setFill("lightgray")
+    button.draw(win)
+    
+    label = Text(Point(200, 200), "Click Here")
+    label.draw(win)
+    
+  
+    valid_click = False
+    while not valid_click:
+        click = win.getMouse()
+        if is_clicked(click, button):
+            valid_click = True
+            
+  
+    label.setText("Button Clicked!")
+    button.setFill("green")
+    
+    win.getMouse()
+    win.close()
+
+if __name__ == "__main__":
+    main()
+3.def main():
+    print("--- Bouncing Ball Calculator ---")
+    initial_height = float(input("Enter the initial drop height (in meters): "))
+    
+    height = initial_height
+    bounces = 0
+    
+    
+    while height >= 0.001:
+        height *= 0.60
+        bounces += 1
+        
+    print(f"\nThe ball bounces {bounces} times before peak height is less than 1 mm.")
+
+if __name__ == "__main__":
+    main()
+4.import time
+from graphics import *
+
+def main():
+    win = GraphWin("Bouncing Ball Animation", 400, 600)
+    
+   
+    prompt = Text(Point(200, 250), "Enter release height in meters:")
+    prompt.draw(win)
+    entry = Entry(Point(200, 290), 10)
+    entry.setText("10.0")
+    entry.draw(win)
+    
+    
+    win.getMouse()
+    initial_height = float(entry.getText())
+    
+    
+    prompt.undraw()
+    entry.undraw()
+    
+ 
+    win.setCoords(0, 0, 10, initial_height)
+    
+  
+    ground = Line(Point(0, 0), Point(10, 0))
+    ground.setWidth(4)
+    ground.draw(win)
+    
+    
+    radius = initial_height * 0.03
+    ball = Circle(Point(5, initial_height), radius)
+    ball.setFill("crimson")
+    ball.draw(win)
+    
+    height = initial_height
+    
+    while height >= 0.001:
+       
+        time.sleep(0.2)  # Control speed frame pacing
+        ball.move(0, -height)
+        
+     
+        height *= 0.60
+        if height < 0.001:
+            break
+            
+      
+        time.sleep(0.2)
+        ball.move(0, height)
+        
+   
+    msg = Text(Point(5, initial_height / 2), "Simulation Complete!\nClick to exit.")
+    msg.draw(win)
+    win.getMouse()
+    win.close()
+
+if __name__ == "__main__":
+    main()
+5.def gcd(m, n):
+    """Calculates the Greatest Common Divisor using Euclid's Algorithm (Page 232)."""
+    while n != 0:
+        m, n = n, m % n
+    return m
+
+def phi(n):
+    """Accumulates and returns all numbers up to n-1 that are relatively prime to n."""
+    rel_prime_list = []
+  
+    for k in range(1, n):
+        if gcd(n, k) == 1:
+            rel_prime_list.append(k)
+    return rel_prime_list
+
+def main():
+    print("--- Euler's Totient Function Calculator ---")
+    n = int(input("Enter an integer (n): "))
+    
+    if n <= 0:
+        print("Please enter a positive integer greater than 0.")
+    else:
+        coprime_numbers = phi(n)
+        print(f"\nPositive integers relatively prime to {n}:")
+        print(coprime_numbers)
+        print(f"\n𝜑({n}) = {len(coprime_numbers)}")
+
+if __name__ == "__main__":
+    main()
+
+
